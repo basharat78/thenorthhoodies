@@ -1,0 +1,305 @@
+{
+    "store_name": "THE NORTH HOODIES",
+    "tagline": "thenorthhoodies.com",
+    "announcement": "🔥 LIMITED DROP 04 • 500 GSM LUXURY HEAVYWEIGHT HOODIES • CASH ON DELIVERY ALL OVER PAKISTAN",
+    "whatsapp_number": "03418956864",
+    "currency": "$",
+    "currency_code": "USD",
+    "whatsapp_message_template": "Hello! I would like to order *{product_name}* ({hoodie_type}) 🛍️\r\n\r\n• Selected Color: {color}\r\n• Selected Size: {size}\r\n• Quantity: {quantity}\r\n• Total Price: {total_price}\r\n\r\nPlease confirm availability and share payment & delivery details!",
+    "categories": [
+        "Oversized Pullovers",
+        "Zip-Up Hoodies",
+        "Vintage Washes",
+        "Thermal Fleece"
+    ],
+    "hoodies": [
+        {
+            "id": "archive-500gsm-pullover",
+            "title": "The 500 GSM Archive Pullover",
+            "type": "Oversized Pullover",
+            "badge": "BEST SELLER",
+            "sale_price": 79,
+            "original_price": 120,
+            "stock_status": "low_stock",
+            "stock_text": "Only 9 pieces remaining",
+            "rating": 4.96,
+            "review_count": 142,
+            "image": "assets/images/hoodie-black.jpg",
+            "secondary_image": "assets/images/hoodie-lifestyle.jpg",
+            "gallery": [
+                "assets/images/hoodie-black.jpg",
+                "assets/images/hoodie-lifestyle.jpg",
+                "assets/images/hoodie-fabric.jpg"
+            ],
+            "short_description": "Engineered from custom-milled 500 GSM organic French Terry cotton. Architectural boxy drape, dropped shoulders, double-layered seamless hood, and pre-shrunk vintage wash.",
+            "fabric": "100% GOTS-Certified Heavyweight Organic Cotton, 500 GSM loopback French Terry.",
+            "fit": "Signature oversized boxy fit with dropped shoulders and cropped waist ribbing.",
+            "colors": [
+                {
+                    "name": "Washed Onyx",
+                    "hex": "#1e1e1e",
+                    "image": "assets/images/hoodie-black.jpg"
+                },
+                {
+                    "name": "Bone Oatmeal",
+                    "hex": "#e7dfd1",
+                    "image": "assets/images/hoodie-bone.jpg"
+                }
+            ],
+            "sizes": [
+                {
+                    "label": "S",
+                    "chest": "48\"",
+                    "length": "27\"",
+                    "available": true
+                },
+                {
+                    "label": "M",
+                    "chest": "50\"",
+                    "length": "28\"",
+                    "available": true
+                },
+                {
+                    "label": "L",
+                    "chest": "52\"",
+                    "length": "29\"",
+                    "available": true
+                },
+                {
+                    "label": "XL",
+                    "chest": "54\"",
+                    "length": "30\"",
+                    "available": true
+                }
+            ]
+        },
+        {
+            "id": "boxy-charcoal-zipup",
+            "title": "Two-Way Heavyweight Boxy Zip-Up",
+            "type": "Zip-Up Hoodie",
+            "badge": "NEW DROP",
+            "sale_price": 89,
+            "original_price": 135,
+            "stock_status": "in_stock",
+            "stock_text": "In Stock — Ships within 24 Hours",
+            "rating": 4.94,
+            "review_count": 92,
+            "image": "assets/images/hoodie-zipup.jpg",
+            "secondary_image": "assets/images/hoodie-fabric.jpg",
+            "gallery": [
+                "assets/images/hoodie-zipup.jpg",
+                "assets/images/hoodie-black.jpg",
+                "assets/images/hoodie-fabric.jpg"
+            ],
+            "short_description": "Substantial 500 GSM French Terry zip-up featuring a custom antique silver two-way zipper, deep structured hood, split kangaroo pockets, and relaxed dropped shoulder drape.",
+            "fabric": "500 GSM Dense Loopback French Terry with custom silver hardware.",
+            "fit": "Relaxed streetwear boxy silhouette with heavy-duty ribbed cuffs and hem.",
+            "colors": [
+                {
+                    "name": "Charcoal Slate",
+                    "hex": "#3b3d45",
+                    "image": "assets/images/hoodie-zipup.jpg"
+                },
+                {
+                    "name": "Washed Onyx",
+                    "hex": "#1e1e1e",
+                    "image": "assets/images/hoodie-black.jpg"
+                }
+            ],
+            "sizes": [
+                {
+                    "label": "S",
+                    "chest": "48\"",
+                    "length": "27\"",
+                    "available": true
+                },
+                {
+                    "label": "M",
+                    "chest": "50\"",
+                    "length": "28\"",
+                    "available": true
+                },
+                {
+                    "label": "L",
+                    "chest": "52\"",
+                    "length": "29\"",
+                    "available": true
+                },
+                {
+                    "label": "XL",
+                    "chest": "54\"",
+                    "length": "30\"",
+                    "available": true
+                }
+            ]
+        },
+        {
+            "id": "mineral-wash-sage-hoodie",
+            "title": "Mineral Washed Vintage Sage Hoodie",
+            "type": "Vintage Wash Pullover",
+            "badge": "LIMITED EDITION",
+            "sale_price": 82,
+            "original_price": 125,
+            "stock_status": "low_stock",
+            "stock_text": "Only 6 pieces left in Drop 04",
+            "rating": 4.98,
+            "review_count": 67,
+            "image": "assets/images/hoodie-sage.jpg",
+            "secondary_image": "assets/images/hoodie-lifestyle.jpg",
+            "gallery": [
+                "assets/images/hoodie-sage.jpg",
+                "assets/images/hoodie-lifestyle.jpg",
+                "assets/images/hoodie-fabric.jpg"
+            ],
+            "short_description": "Individually garment pigment-dyed and enzyme washed for an authentic sun-faded patina. 480 GSM plush loopback fleece with reinforced double-needle construction.",
+            "fabric": "480 GSM Pigment-Dyed Loopback Cotton Fleece.",
+            "fit": "True to size for standard oversized look. Pre-shrunk to eliminate post-wash shrinkage.",
+            "colors": [
+                {
+                    "name": "Vintage Sage",
+                    "hex": "#76856c",
+                    "image": "assets/images/hoodie-sage.jpg"
+                },
+                {
+                    "name": "Bone Oatmeal",
+                    "hex": "#e7dfd1",
+                    "image": "assets/images/hoodie-bone.jpg"
+                }
+            ],
+            "sizes": [
+                {
+                    "label": "S",
+                    "chest": "48\"",
+                    "length": "27\"",
+                    "available": true
+                },
+                {
+                    "label": "M",
+                    "chest": "50\"",
+                    "length": "28\"",
+                    "available": true
+                },
+                {
+                    "label": "L",
+                    "chest": "52\"",
+                    "length": "29\"",
+                    "available": true
+                },
+                {
+                    "label": "XL",
+                    "chest": "54\"",
+                    "length": "30\"",
+                    "available": true
+                }
+            ]
+        },
+        {
+            "id": "bone-oversized-essential",
+            "title": "Raw Bone Oversized Essential Hoodie",
+            "type": "Oversized Pullover",
+            "badge": "CORE ARCHIVE",
+            "sale_price": 75,
+            "original_price": 115,
+            "stock_status": "in_stock",
+            "stock_text": "Ready to Ship",
+            "rating": 4.95,
+            "review_count": 118,
+            "image": "assets/images/hoodie-bone.jpg",
+            "secondary_image": "assets/images/hoodie-fabric.jpg",
+            "gallery": [
+                "assets/images/hoodie-bone.jpg",
+                "assets/images/hoodie-black.jpg",
+                "assets/images/hoodie-fabric.jpg"
+            ],
+            "short_description": "Unbleached natural ecru French Terry cotton with subtle natural cotton fleck texture. Clean minimal drape designed to pair effortlessly with any wardrobe.",
+            "fabric": "500 GSM Natural Unbleached Ecru Cotton.",
+            "fit": "Architectural boxy cut with drop shoulder seams and seamless hood.",
+            "colors": [
+                {
+                    "name": "Bone Oatmeal",
+                    "hex": "#e7dfd1",
+                    "image": "assets/images/hoodie-bone.jpg"
+                },
+                {
+                    "name": "Washed Onyx",
+                    "hex": "#1e1e1e",
+                    "image": "assets/images/hoodie-black.jpg"
+                }
+            ],
+            "sizes": [
+                {
+                    "label": "S",
+                    "chest": "48\"",
+                    "length": "27\"",
+                    "available": true
+                },
+                {
+                    "label": "M",
+                    "chest": "50\"",
+                    "length": "28\"",
+                    "available": true
+                },
+                {
+                    "label": "L",
+                    "chest": "52\"",
+                    "length": "29\"",
+                    "available": true
+                },
+                {
+                    "label": "XL",
+                    "chest": "54\"",
+                    "length": "30\"",
+                    "available": true
+                }
+            ]
+        }
+    ],
+    "highlights": [
+        "100% Dedicated to Heavyweight Hoodies",
+        "480 - 500 GSM Ultra-Dense French Terry Cotton",
+        "Architectural Boxy Silhouettes & Dropped Shoulders",
+        "Seamless Double-Layer Hoods (Hold Shape Without Drawstrings)",
+        "Vintage Garment Washes & Pre-Shrunk Finishing"
+    ],
+    "reviews": [
+        {
+            "name": "Marcus V.",
+            "rating": 5,
+            "date": "2 days ago",
+            "variant": "The 500 GSM Archive · Washed Onyx (Size L)",
+            "comment": "The weight of these hoodies is unreal. The 500 GSM cotton has substantial heft, the hood stays upright, and ordering directly on WhatsApp took literally 30 seconds."
+        },
+        {
+            "name": "David L.",
+            "rating": 5,
+            "date": "5 days ago",
+            "variant": "Two-Way Zip-Up · Charcoal Slate (Size XL)",
+            "comment": "Best zip-up hoodie I've ever owned. Heavy gauge silver zipper and the drape is flawless. Customer service on WhatsApp confirmed my measurements within minutes."
+        },
+        {
+            "name": "Julian K.",
+            "rating": 5,
+            "date": "1 week ago",
+            "variant": "Mineral Wash Sage · Size M",
+            "comment": "The sage mineral wash color is even richer in person. Super thick ribbed waistband that sits right at the hips. 10/10 streetwear staple."
+        }
+    ],
+    "faqs": [
+        {
+            "question": "Why do you only sell hoodies?",
+            "answer": "We are a dedicated hoodie atelier. Rather than producing generic clothing lines, we dedicate 100% of our research, fabric milling, and pattern-making to creating the world's finest 500 GSM heavyweight hoodies."
+        },
+        {
+            "question": "How does ordering on WhatsApp work?",
+            "answer": "Pick any hoodie, select your color, size, and quantity, then tap 'Order via WhatsApp'. A pre-filled message with your exact order summary will open in your WhatsApp. We confirm availability immediately, arrange your preferred payment, and dispatch your package with tracking."
+        },
+        {
+            "question": "What if the size doesn't fit me?",
+            "answer": "We offer a 14-day hassle-free size exchange policy. Just message us on the same WhatsApp chat and our support team will promptly coordinate a replacement size."
+        },
+        {
+            "question": "How fast is express shipping?",
+            "answer": "All orders are packaged and dispatched within 24 hours. Express tracked delivery usually takes 2-4 business days."
+        }
+    ]
+}
