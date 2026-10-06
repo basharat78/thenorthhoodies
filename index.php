@@ -10,11 +10,11 @@ $initial_phone = clean_phone_number($store['whatsapp_number'] ?? '');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title><?= e($store['store_name'] ?? 'THE NORTH HOODIES') ?> — <?= e($store['tagline'] ?? 'thenorthhoodies.com') ?></title>
+    <title><?= e($store['store_name'] ?? 'ATLANTICS') ?> — <?= e($store['tagline'] ?? 'shopatlantics.com') ?></title>
     
     <!-- SEO & Social Meta -->
     <meta name="description" content="Exclusive streetwear collection of luxury 500 GSM heavyweight hoodies. Oversized pullovers, boxy zip-ups, and mineral-washed fleeces. Order directly via WhatsApp.">
-    <meta property="og:title" content="<?= e($store['store_name'] ?? 'THE NORTH HOODIES') ?>">
+    <meta property="og:title" content="<?= e($store['store_name'] ?? 'ATLANTICS') ?>">
     <meta property="og:description" content="Dedicated 500 GSM Heavyweight Hoodie Atelier. Order directly via WhatsApp.">
     <meta property="og:type" content="website">
     
@@ -45,8 +45,8 @@ $initial_phone = clean_phone_number($store['whatsapp_number'] ?? '');
 <header class="site-header">
     <div class="header-inner">
         <div class="brand-wrap">
-            <span class="brand-title"><?= e($store['store_name'] ?? 'THE NORTH HOODIES') ?></span>
-            <span class="brand-tag"><?= e($store['tagline'] ?? 'thenorthhoodies.com') ?></span>
+            <span class="brand-title"><?= e($store['store_name'] ?? 'ATLANTICS') ?></span>
+            <span class="brand-tag"><?= e($store['tagline'] ?? 'shopatlantics.com') ?></span>
         </div>
         <div class="header-right">
             <span style="font-size:12px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;" class="hide-mobile">
@@ -67,7 +67,7 @@ $initial_phone = clean_phone_number($store['whatsapp_number'] ?? '');
             <span class="badge-pulse"></span>
             Drop 04 — Heavyweight French Terry
         </div>
-        <h1 class="hero-title">The North Hoodies</h1>
+        <h1 class="hero-title">Atlantics Heavyweight Hoodies</h1>
         <p class="hero-desc">
             We do one thing, with zero compromises: <strong>Heavyweight Hoodies</strong>. 480 to 500 GSM loopback cotton, architectural boxy fits, seamless structured hoods, and vintage garment dyes.
         </p>
@@ -306,8 +306,8 @@ $initial_phone = clean_phone_number($store['whatsapp_number'] ?? '');
 
 <!-- Footer -->
 <footer class="site-footer">
-    <p>© <?= date('Y') ?> <?= e($store['store_name'] ?? 'THE NORTH HOODIES') ?>. All rights reserved.</p>
-    <p style="margin-top:6px;">THE NORTH HOODIES • thenorthhoodies.com • Direct WhatsApp Checkout</p>
+    <p>© <?= date('Y') ?> <?= e($store['store_name'] ?? 'ATLANTICS') ?>. All rights reserved.</p>
+    <p style="margin-top:6px;">ATLANTICS • shopatlantics.com • Direct WhatsApp Checkout</p>
 </footer>
 
 <script src="assets/js/app.js"></script>

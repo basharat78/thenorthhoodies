@@ -205,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="login-card">
     <div class="login-header">
         <div class="brand-badge"><span></span> Admin Portal</div>
-        <h1 class="login-title"><?= e($product['store_name'] ?? 'THE NORTH HOODIES') ?></h1>
+        <h1 class="login-title"><?= e($product['store_name'] ?? 'ATLANTICS') ?></h1>
         <p class="login-sub">Manage product details, pricing, and WhatsApp orders</p>
     </div>
 

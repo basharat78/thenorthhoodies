@@ -1,5 +1,5 @@
 /**
- * THE NORTH HOODIES — Client Application
+ * ATLANTICS — Client Application
  * Handles category filtering, quick-order modal, color & size selection,
  * real-time total recalculation, and automated WhatsApp order link generation.
  */

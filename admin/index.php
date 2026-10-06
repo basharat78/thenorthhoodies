@@ -188,7 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // 5. SAVE GLOBAL STORE SETTINGS
         } elseif ($action === 'save_store_settings') {
-            $store['store_name'] = trim($_POST['store_name'] ?? 'THE NORTH HOODIES');
+            $store['store_name'] = trim($_POST['store_name'] ?? 'ATLANTICS');
             $store['tagline'] = trim($_POST['tagline'] ?? '');
             $store['announcement'] = trim($_POST['announcement'] ?? '');
             $store['currency'] = trim($_POST['currency'] ?? '$');
@@ -233,7 +233,7 @@ $csrf = get_csrf_token();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoodie Store Manager — <?= e($store['store_name'] ?? 'THE NORTH HOODIES') ?></title>
+    <title>Hoodie Store Manager — <?= e($store['store_name'] ?? 'ATLANTICS') ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -328,9 +328,9 @@ $csrf = get_csrf_token();
 
 <header class="admin-navbar">
     <div class="nav-brand">
-        <span class="brand-logo-badge">THE NORTH HOODIES</span>
+        <span class="brand-logo-badge">ATLANTICS</span>
         <div>
-            <span class="nav-brand-title"><?= e($store['store_name'] ?? 'THE NORTH HOODIES') ?></span>
+            <span class="nav-brand-title"><?= e($store['store_name'] ?? 'ATLANTICS') ?></span>
             <span class="nav-brand-subtitle">Catalog & WhatsApp Manager</span>
         </div>
     </div>
@@ -743,11 +743,11 @@ $csrf = get_csrf_token();
                 <div class="form-grid-2">
                     <div class="form-group">
                         <label class="form-label">Store Brand Name <span class="req">*</span></label>
-                        <input type="text" name="store_name" class="form-input" value="<?= e($store['store_name'] ?? 'THE NORTH HOODIES') ?>" required>
+                        <input type="text" name="store_name" class="form-input" value="<?= e($store['store_name'] ?? 'ATLANTICS') ?>" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Store Tagline</label>
-                        <input type="text" name="tagline" class="form-input" value="<?= e($store['tagline'] ?? 'thenorthhoodies.com') ?>">
+                        <input type="text" name="tagline" class="form-input" value="<?= e($store['tagline'] ?? 'shopatlantics.com') ?>">
                     </div>
                 </div>
 

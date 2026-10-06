@@ -1,4 +1,4 @@
-# THE NORTH HOODIES (thenorthhoodies.com)
+# ATLANTICS (shopatlantics.com)
 
 A specialized e-commerce brand website dedicated strictly to premium heavyweight streetwear hoodies (**500 GSM loopback cotton**). Built with high-converting direct WhatsApp checkout and an intuitive flat-file PHP admin backend — engineered to run with **zero external database setup** on **Hostinger Shared Hosting**.
 
@@ -39,7 +39,7 @@ A specialized e-commerce brand website dedicated strictly to premium heavyweight
 ## 🔐 Admin Dashboard Access
 
 - **Local URL**: `http://localhost:8088/admin/login.php`
-- **Live URL**: `https://thenorthhoodies.com/admin/login.php`
+- **Live URL**: `https://shopatlantics.com/admin/login.php`
 - **Default Username**: `admin`
 - **Default Password**: `admin123`
 
@@ -50,7 +50,7 @@ A specialized e-commerce brand website dedicated strictly to premium heavyweight
 ## 📦 Hostinger Shared Hosting Deployment
 
 1. Log in to your **Hostinger hPanel** ([hpanel.hostinger.com](https://hpanel.hostinger.com)).
-2. Go to **Websites** → Click **Manage** for `thenorthhoodies.com`.
+2. Go to **Websites** → Click **Manage** for `shopatlantics.com`.
 3. Open **File Manager** and enter the `public_html/` directory.
 4. Upload all files from this project into `public_html/`:
    ```text
@@ -86,7 +86,7 @@ A specialized e-commerce brand website dedicated strictly to premium heavyweight
            └── hoodie-sage.jpg
    ```
 5. Ensure permissions on `data/` and `uploads/` are set to `755` so new images and product edits can be saved.
-6. Open `https://thenorthhoodies.com` in your browser!
+6. Open `https://shopatlantics.com` in your browser!
 
 ---
 
@@ -112,4 +112,4 @@ php -S localhost:8088
 
 ## 📄 License
 
-Proprietary © 2026 THE NORTH HOODIES. All rights reserved.
+Proprietary © 2026 ATLANTICS. All rights reserved.
