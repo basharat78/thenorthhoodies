@@ -46,7 +46,7 @@ $initial_phone = clean_phone_number($store['whatsapp_number'] ?? '');
     <div class="header-inner">
         <div class="brand-wrap">
             <span class="brand-title"><?= e($store['store_name'] ?? 'ATLANTICS') ?></span>
-            <span class="brand-tag"><?= e($store['tagline'] ?? 'shopatlantics.com') ?></span>
+            <span class="brand-tag hide-mobile"><?= e($store['tagline'] ?? 'shopatlantics.com') ?></span>
         </div>
         <div class="header-right">
             <span style="font-size:12px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;" class="hide-mobile">
@@ -54,7 +54,7 @@ $initial_phone = clean_phone_number($store['whatsapp_number'] ?? '');
             </span>
             <a href="https://wa.me/<?= e($initial_phone) ?>?text=<?= rawurlencode("Hello! I have a question about your hoodie collection.") ?>" target="_blank" rel="noopener" class="header-wa-btn">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"></path></svg>
-                <span>WhatsApp Concierge</span>
+                <span>WhatsApp</span>
             </a>
         </div>
     </div>
