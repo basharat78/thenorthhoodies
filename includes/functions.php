@@ -99,7 +99,11 @@ function build_whatsapp_url_for_hoodie($store, $hoodie, $selected_color = '', $s
         $phone = '1234567890';
     }
 
-    $template = $store['whatsapp_message_template'] ?? "Hello! I would like to order {product_name} ({hoodie_type}).\nColor: {color}\nSize: {size}\nQuantity: {quantity}\nTotal: {total_price}";
+    $template = $store['whatsapp_message_template'] ?? "Hello! I would like to order {product_name} ({hoodie_type}).
+Color: {color}
+Size: {size}
+Quantity: {quantity}
+Total: {total_price}";
 
     $unit_price = (float)($hoodie['sale_price'] ?? $hoodie['original_price'] ?? 0);
     $total_price = ($store['currency'] ?? '$') . number_format($unit_price * max(1, (int)$quantity), 2);
@@ -118,11 +122,19 @@ function build_whatsapp_url_for_hoodie($store, $hoodie, $selected_color = '', $s
 }
 
 /**
- * Handle secure file upload for images
+ * Handle secure file upload for images (works with direct $_FILES entry or indexed file info array)
  */
 function handle_image_upload($file_array) {
-    if (!isset($file_array['error']) || $file_array['error'] !== UPLOAD_ERR_OK) {
-        return ['success' => false, 'error' => 'No file uploaded or upload error code: ' . ($file_array['error'] ?? 'unknown')];
+    if (!is_array($file_array) || !isset($file_array['error'])) {
+        return ['success' => false, 'error' => 'No file provided'];
+    }
+
+    if ($file_array['error'] === UPLOAD_ERR_NO_FILE) {
+        return ['success' => false, 'error' => 'No file selected'];
+    }
+
+    if ($file_array['error'] !== UPLOAD_ERR_OK) {
+        return ['success' => false, 'error' => 'Upload error code: ' . ($file_array['error'] ?? 'unknown')];
     }
 
     $allowed_extensions = ['jpg', 'jpeg', 'png', 'webp', 'avif'];
@@ -131,7 +143,7 @@ function handle_image_upload($file_array) {
     $extension = strtolower(pathinfo($file_array['name'], PATHINFO_EXTENSION));
 
     if (!in_array($extension, $allowed_extensions)) {
-        return ['success' => false, 'error' => 'Invalid file extension. Only JPG, PNG, WEBP allowed.'];
+        return ['success' => false, 'error' => 'Invalid file extension. Only JPG, PNG, WEBP, AVIF allowed.'];
     }
 
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -142,9 +154,9 @@ function handle_image_upload($file_array) {
         return ['success' => false, 'error' => 'Invalid file type: ' . $mime];
     }
 
-    // Limit size to 10MB
-    if ($file_array['size'] > 10 * 1024 * 1024) {
-        return ['success' => false, 'error' => 'File too large. Maximum size is 10MB.'];
+    // Limit size to 15MB
+    if ($file_array['size'] > 15 * 1024 * 1024) {
+        return ['success' => false, 'error' => 'File too large. Maximum size is 15MB.'];
     }
 
     if (!is_dir(UPLOAD_DIR)) {
@@ -158,5 +170,24 @@ function handle_image_upload($file_array) {
         return ['success' => true, 'path' => UPLOAD_URL . $filename];
     }
 
-    return ['success' => false, 'error' => 'Failed to move uploaded file. Check directory permissions.'];
+    return ['success' => false, 'error' => 'Failed to save uploaded file. Check folder permissions.'];
+}
+
+/**
+ * Extract a single file entry from a nested/multi-file $_FILES array: $_FILES[$key][...][$index]
+ */
+function get_nested_file_entry($key, $index) {
+    if (!isset($_FILES[$key]) || !isset($_FILES[$key]['name']) || !is_array($_FILES[$key]['name'])) {
+        return null;
+    }
+    if (!array_key_exists($index, $_FILES[$key]['name'])) {
+        return null;
+    }
+    return [
+        'name' => $_FILES[$key]['name'][$index],
+        'type' => $_FILES[$key]['type'][$index] ?? '',
+        'tmp_name' => $_FILES[$key]['tmp_name'][$index] ?? '',
+        'error' => $_FILES[$key]['error'][$index] ?? UPLOAD_ERR_NO_FILE,
+        'size' => $_FILES[$key]['size'][$index] ?? 0,
+    ];
 }

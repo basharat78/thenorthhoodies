@@ -77,7 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
       modalBadge.style.display = item.badge ? 'inline-block' : 'none';
     }
     if (modalDesc) modalDesc.textContent = item.short_description || '';
-    if (modalImg) modalImg.src = activeColor.image || item.image;
+    const initialImg = (activeColor && activeColor.image && activeColor.image.trim()) ? activeColor.image : item.image;
+    if (modalImg) modalImg.src = initialImg;
     if (modalStock) modalStock.textContent = item.stock_text || 'Ready to Ship';
 
     const unitPrice = parseFloat(item.sale_price || item.original_price || 0);
@@ -104,10 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
           modalSwatchesContainer.querySelectorAll('.modal-swatch-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           activeColor = c;
-          if (c.image && modalImg) {
+          const targetImg = (c && c.image && c.image.trim()) ? c.image : item.image;
+          if (targetImg && modalImg) {
             modalImg.style.opacity = '0.3';
             setTimeout(() => {
-              modalImg.src = c.image;
+              modalImg.src = targetImg;
               modalImg.style.opacity = '1';
             }, 100);
           }

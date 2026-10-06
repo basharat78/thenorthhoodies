@@ -3,8 +3,8 @@
     "tagline": "shopatlantics.com",
     "announcement": "🔥 LIMITED DROP 04 • 500 GSM LUXURY HEAVYWEIGHT HOODIES • CASH ON DELIVERY ALL OVER PAKISTAN",
     "whatsapp_number": "03418956864",
-    "currency": "$",
-    "currency_code": "USD",
+    "currency": "PKR",
+    "currency_code": "PKR",
     "whatsapp_message_template": "Hello! I would like to order *{product_name}* ({hoodie_type}) 🛍️\r\n\r\n• Selected Color: {color}\r\n• Selected Size: {size}\r\n• Quantity: {quantity}\r\n• Total Price: {total_price}\r\n\r\nPlease confirm availability and share payment & delivery details!",
     "categories": [
         "Oversized Pullovers",
@@ -13,6 +13,43 @@
         "Thermal Fleece"
     ],
     "hoodies": [
+        {
+            "id": "nike-hoodie",
+            "title": "Nike Hoodie",
+            "type": "Oversized Pullovers",
+            "badge": "BEST SELLER",
+            "sale_price": 1999,
+            "original_price": 2999,
+            "stock_status": "low_stock",
+            "stock_text": "Only 1 pieces remaining in this batch",
+            "rating": 4.95,
+            "review_count": 50,
+            "image": "uploads/nike-orange.jpeg",
+            "secondary_image": "uploads/nike-orange.jpeg",
+            "short_description": "Engineered from custom-milled heavyweight organic cotton.",
+            "fabric": "500 GSM Heavyweight French Terry Cotton",
+            "fit": "Boxy cut",
+            "colors": [
+                {
+                    "name": "Vibrant Orange",
+                    "hex": "#ff5500",
+                    "image": "uploads/nike-orange.jpeg"
+                },
+                {
+                    "name": "Washed Onyx",
+                    "hex": "#1e1e1e",
+                    "image": "assets/images/hoodie-black.jpg"
+                }
+            ],
+            "sizes": [
+                {
+                    "label": "M",
+                    "chest": "50\"",
+                    "length": "28\"",
+                    "available": true
+                }
+            ]
+        },
         {
             "id": "archive-500gsm-pullover",
             "title": "The 500 GSM Archive Pullover",

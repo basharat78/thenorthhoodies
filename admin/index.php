@@ -49,23 +49,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $store['categories'] = array_values(array_unique($categories));
             }
 
-            // Parse colors
+            // Image Upload Handling (Primary Catalog Photo)
+            $primary_image = trim($_POST['existing_image'] ?? 'assets/images/hoodie-black.jpg');
+            if (!empty($_FILES['hoodie_image']['name']) && $_FILES['hoodie_image']['error'] === UPLOAD_ERR_OK) {
+                $upload_res = handle_image_upload($_FILES['hoodie_image']);
+                if ($upload_res['success']) {
+                    $primary_image = $upload_res['path'];
+                } else {
+                    $error_msg = 'Main photo upload note: ' . $upload_res['error'];
+                }
+            }
+
+            // Image Upload Handling (Secondary Angle / Lifestyle Photo)
+            $secondary_image = trim($_POST['existing_secondary_image'] ?? $primary_image);
+            if (!empty($_FILES['secondary_image_file']['name']) && $_FILES['secondary_image_file']['error'] === UPLOAD_ERR_OK) {
+                $sec_upload = handle_image_upload($_FILES['secondary_image_file']);
+                if ($sec_upload['success']) {
+                    $secondary_image = $sec_upload['path'];
+                }
+            }
+            if (empty($secondary_image)) {
+                $secondary_image = $primary_image;
+            }
+
+            // Parse colors with direct image upload support & automatic fallback
             $colors = [];
             if (!empty($_POST['colors']) && is_array($_POST['colors'])) {
-                foreach ($_POST['colors'] as $c) {
+                foreach ($_POST['colors'] as $cidx => $c) {
                     $c_name = trim($c['name'] ?? '');
-                    if (!empty($c_name)) {
-                        $colors[] = [
-                            'name' => $c_name,
-                            'hex' => trim($c['hex'] ?? '#1e1e1e'),
-                            'image' => trim($c['image'] ?? '')
-                        ];
+                    if (empty($c_name)) continue;
+
+                    $c_hex = trim($c['hex'] ?? '#000000');
+                    $c_img = trim($c['existing_image'] ?? '');
+
+                    // Check if a new photo file was uploaded for this color
+                    $c_file = get_nested_file_entry('color_images', $cidx);
+                    if ($c_file && $c_file['error'] === UPLOAD_ERR_OK) {
+                        $c_upload = handle_image_upload($c_file);
+                        if ($c_upload['success']) {
+                            $c_img = $c_upload['path'];
+                        }
                     }
+
+                    // Automatic inheritance: If no specific color image provided, default to main hoodie photo
+                    if (empty($c_img)) {
+                        $c_img = $primary_image;
+                    }
+
+                    $colors[] = [
+                        'name' => $c_name,
+                        'hex' => $c_hex,
+                        'image' => $c_img
+                    ];
                 }
             }
             if (empty($colors)) {
                 $colors = [
-                    ['name' => 'Washed Onyx', 'hex' => '#1e1e1e', 'image' => 'assets/images/hoodie-black.jpg']
+                    ['name' => 'Original', 'hex' => '#f97316', 'image' => $primary_image]
                 ];
             }
 
@@ -93,17 +133,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ];
             }
 
-            // Image Upload Handling
-            $primary_image = trim($_POST['existing_image'] ?? 'assets/images/hoodie-black.jpg');
-            if (!empty($_FILES['hoodie_image']['name'])) {
-                $upload_res = handle_image_upload($_FILES['hoodie_image']);
-                if ($upload_res['success']) {
-                    $primary_image = $upload_res['path'];
-                } else {
-                    $error_msg = 'Image upload warning: ' . $upload_res['error'];
-                }
-            }
-
             $hoodie_data = [
                 'id' => $h_id,
                 'title' => trim($_POST['title'] ?? 'Heavyweight Hoodie'),
@@ -116,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'rating' => (float)($_POST['rating'] ?? 4.95),
                 'review_count' => (int)($_POST['review_count'] ?? 50),
                 'image' => $primary_image,
-                'secondary_image' => trim($_POST['secondary_image'] ?? $primary_image),
+                'secondary_image' => $secondary_image,
                 'short_description' => trim($_POST['short_description'] ?? ''),
                 'fabric' => trim($_POST['fabric'] ?? '500 GSM Heavyweight French Terry Cotton'),
                 'fit' => trim($_POST['fit'] ?? 'Boxy drop-shoulder cut'),
@@ -554,60 +583,93 @@ $csrf = get_csrf_token();
                 </div>
             </div>
 
-            <!-- Image Upload Section -->
+            <!-- Hoodie Photography Upload (Zero Manual Links) -->
             <div class="card-section">
-                <h2 class="card-title">Hoodie Photography (Fixed 1:1 Ratio Guaranteed)</h2>
-                <p class="card-desc">You can upload any photo size (portrait, square, or wide); the system automatically centers and fits it into a clean 1:1 container so it never distorts or breaks the card layout.</p>
+                <h2 class="card-title">Hoodie Photography (Upload Directly — No Manual Links Needed)</h2>
+                <p class="card-desc">Upload photos directly from your computer or phone. The system automatically centers and crops to a flawless 1:1 square ratio with zero layout distortion.</p>
 
-                <div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
-                    <div style="width:120px; height:120px; border-radius:var(--radius-md); overflow:hidden; background:#000; border:1px solid var(--border-color); flex-shrink:0; position:relative;">
-                        <img src="../<?= e($editing_hoodie['image'] ?? 'assets/images/hoodie-black.jpg') ?>" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
+                <div class="form-grid-2" style="margin-top: 14px;">
+                    <!-- Main Catalog Photo -->
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px;">
+                        <label class="form-label" style="font-weight: 700; color: #fff; margin-bottom: 8px;">Main Catalog Photo <span class="req">*</span></label>
+                        <div style="display: flex; gap: 16px; align-items: center;">
+                            <div style="width: 90px; height: 90px; border-radius: var(--radius-md); overflow: hidden; background: #000; border: 1px solid var(--border-color); flex-shrink: 0; position: relative;">
+                                <img id="main-photo-preview" src="../<?= e($editing_hoodie['image'] ?? 'assets/images/hoodie-black.jpg') ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div style="flex-grow: 1;">
+                                <input type="file" name="hoodie_image" id="hoodie-image-input" accept="image/*" class="form-input" style="padding: 8px;">
+                                <input type="hidden" name="existing_image" value="<?= e($editing_hoodie['image'] ?? 'assets/images/hoodie-black.jpg') ?>">
+                                <div class="form-hint" style="margin-top: 6px;">Shown on store home cards & default modal view. Select photo to change.</div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="flex-grow:1;">
-                        <label class="form-label">Upload New Photo (JPG, PNG, WEBP)</label>
-                        <input type="file" name="hoodie_image" accept="image/*" class="form-input" style="padding:8px;">
-                        <div class="form-hint">Or specify an existing asset path below:</div>
-                        <input type="text" name="secondary_image" class="form-input" style="margin-top:6px;" value="<?= e($editing_hoodie['secondary_image'] ?? $editing_hoodie['image'] ?? 'assets/images/hoodie-black.jpg') ?>" placeholder="assets/images/...">
+
+                    <!-- Secondary / Back / Lifestyle Photo -->
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px;">
+                        <label class="form-label" style="font-weight: 700; color: #fff; margin-bottom: 8px;">Secondary Angle / Back View (Optional)</label>
+                        <div style="display: flex; gap: 16px; align-items: center;">
+                            <div style="width: 90px; height: 90px; border-radius: var(--radius-md); overflow: hidden; background: #000; border: 1px solid var(--border-color); flex-shrink: 0; position: relative;">
+                                <img id="secondary-photo-preview" src="../<?= e($editing_hoodie['secondary_image'] ?? $editing_hoodie['image'] ?? 'assets/images/hoodie-black.jpg') ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div style="flex-grow: 1;">
+                                <input type="file" name="secondary_image_file" id="secondary-image-input" accept="image/*" class="form-input" style="padding: 8px;">
+                                <input type="hidden" name="existing_secondary_image" value="<?= e($editing_hoodie['secondary_image'] ?? '') ?>">
+                                <div class="form-hint" style="margin-top: 6px;">Shown on hover. Leave empty to automatically use the main photo.</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Colors Table -->
+            <!-- Available Colors (No manual link typing required) -->
             <div class="card-section">
-                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
-                    <h2 class="card-title" style="margin-bottom:0;">Available Colors</h2>
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+                    <div>
+                        <h2 class="card-title" style="margin-bottom:2px;">Available Colors</h2>
+                        <p class="card-desc" style="margin-bottom:0;">Pick color swatches and optionally upload photos. If no photo is selected, it automatically uses the main hoodie photo.</p>
+                    </div>
                     <button type="button" id="btn-add-color" class="btn btn-secondary btn-sm">+ Add Color</button>
                 </div>
                 <div style="overflow-x:auto;">
                     <table class="dynamic-table">
                         <thead>
                             <tr>
-                                <th style="width: 30%;">Color Name</th>
-                                <th style="width: 25%;">Hex Swatch</th>
-                                <th style="width: 35%;">Associated Image Path</th>
+                                <th style="width: 28%;">Color Name</th>
+                                <th style="width: 22%;">Hex Swatch</th>
+                                <th style="width: 40%;">Color Photo (Direct Upload)</th>
                                 <th style="width: 10%; text-align:right;">Action</th>
                             </tr>
                         </thead>
                         <tbody id="colors-tbody">
                             <?php 
                             $colors_list = !empty($editing_hoodie['colors']) ? $editing_hoodie['colors'] : [
-                                ['name' => 'Washed Onyx', 'hex' => '#1e1e1e', 'image' => 'assets/images/hoodie-black.jpg'],
-                                ['name' => 'Bone Oatmeal', 'hex' => '#e7dfd1', 'image' => 'assets/images/hoodie-bone.jpg']
+                                ['name' => 'Original', 'hex' => '#f97316', 'image' => ($editing_hoodie['image'] ?? '')]
                             ];
                             foreach ($colors_list as $cidx => $col): 
+                                $col_img = $col['image'] ?? '';
+                                $display_img = !empty($col_img) ? $col_img : ($editing_hoodie['image'] ?? 'assets/images/hoodie-black.jpg');
                             ?>
-                                <tr>
+                                <tr class="color-row">
                                     <td>
-                                        <input type="text" name="colors[<?= $cidx ?>][name]" class="form-input" value="<?= e($col['name']) ?>" required>
+                                        <input type="text" name="colors[<?= $cidx ?>][name]" class="form-input" value="<?= e($col['name']) ?>" placeholder="e.g. Orange, Washed Onyx" required>
                                     </td>
                                     <td>
                                         <div style="display:flex; align-items:center; gap:8px;">
-                                            <input type="color" name="colors[<?= $cidx ?>][hex]" value="<?= e($col['hex'] ?? '#000000') ?>" style="width:40px; height:38px; border:none; border-radius:6px; cursor:pointer; background:none;">
-                                            <input type="text" class="form-input color-hex-val" value="<?= e($col['hex'] ?? '#000000') ?>" style="width:90px;" onchange="this.previousElementSibling.value = this.value">
+                                            <input type="color" name="colors[<?= $cidx ?>][hex]" value="<?= e($col['hex'] ?? '#f97316') ?>" style="width:40px; height:38px; border:none; border-radius:6px; cursor:pointer; background:none;">
+                                            <input type="text" class="form-input color-hex-val" value="<?= e($col['hex'] ?? '#f97316') ?>" style="width:90px;" onchange="this.previousElementSibling.value = this.value">
                                         </div>
                                     </td>
                                     <td>
-                                        <input type="text" name="colors[<?= $cidx ?>][image]" class="form-input" value="<?= e($col['image'] ?? '') ?>" placeholder="assets/images/... or URL">
+                                        <div style="display:flex; align-items:center; gap:10px;">
+                                            <div style="width:40px; height:40px; border-radius:6px; overflow:hidden; background:#000; border:1px solid var(--border-color); flex-shrink:0;">
+                                                <img class="color-thumb-preview" src="../<?= e($display_img) ?>" style="width:100%; height:100%; object-fit:cover;">
+                                            </div>
+                                            <div style="flex-grow:1;">
+                                                <input type="file" name="color_images[<?= $cidx ?>]" accept="image/*" class="form-input color-file-input" style="padding:5px 8px; font-size:12px;">
+                                                <input type="hidden" name="colors[<?= $cidx ?>][existing_image]" value="<?= e($col_img) ?>">
+                                                <div class="form-hint" style="font-size:11px; margin-top:2px;">Leave empty to use main photo.</div>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td style="text-align:right;">
                                         <button type="button" class="btn btn-danger btn-sm btn-remove-row">Remove</button>
